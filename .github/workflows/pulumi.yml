@@ -23,12 +23,16 @@ jobs:
       - name: Install Pulumi deps
         run: make install
 
+      - name: Ensure stack exists
+        run: cd infra && ./venv/bin/pulumi stack select dev --non-interactive 2>/dev/null || ./venv/bin/pulumi stack init dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
       - uses: pulumi/actions@v6
         with:
           command: preview
           stack-name: dev
           work-dir: infra
-          upsert-stack: true
           comment-on-pr: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
@@ -51,11 +55,23 @@ jobs:
       - name: Install Pulumi deps
         run: make install
 
+      - name: Ensure stack exists
+        run: cd infra && ./venv/bin/pulumi stack select dev --non-interactive 2>/dev/null || ./venv/bin/pulumi stack init dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
+      - uses: pulumi/actions@v6
+        with:
+          command: preview
+          stack-name: dev
+          work-dir: infra
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+
       - uses: pulumi/actions@v6
         with:
           command: up
           stack-name: dev
           work-dir: infra
-          upsert-stack: true
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
