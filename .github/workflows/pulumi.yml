@@ -24,7 +24,7 @@ jobs:
         run: make install
 
       - name: Ensure stack exists
-        run: cd infra && ./venv/bin/pulumi stack select dev --non-interactive 2>/dev/null || ./venv/bin/pulumi stack init dev
+        run: cd infra && pulumi stack select dev --non-interactive 2>/dev/null || pulumi stack init dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
@@ -56,7 +56,7 @@ jobs:
         run: make install
 
       - name: Ensure stack exists
-        run: cd infra && ./venv/bin/pulumi stack select dev --non-interactive 2>/dev/null || ./venv/bin/pulumi stack init dev
+        run: cd infra && pulumi stack select dev --non-interactive 2>/dev/null || pulumi stack init dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
