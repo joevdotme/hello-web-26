@@ -28,6 +28,7 @@ jobs:
           command: preview
           stack-name: dev
           work-dir: infra
+          upsert-stack: true
           comment-on-pr: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
@@ -55,5 +56,6 @@ jobs:
           command: up
           stack-name: dev
           work-dir: infra
+          upsert-stack: true
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
