@@ -1,0 +1,6 @@
+name: hello-web-26
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: Deploy hello-web-26 Flask app via Docker using Pulumi
